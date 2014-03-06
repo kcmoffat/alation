@@ -40,10 +40,11 @@ public class ServerTest {
 				l.add(p);
 			}
 		} catch (Exception e) {
-			System.out.println("bad fail name");
+			System.out.println("bad file name");
 		}
 		
 		// now lets combine some words to get to 1MM words
+		// NOTE: I added the following JVM arguments before running to increase available memory: -Xms4096m -Xmx4096m
 		for (int i = 0; i < words.size(); i++) {
 			int indexOne = (int) Math.floor(Math.random()*words.size());
 			int indexTwo = (int) Math.floor(Math.random()*words.size());
@@ -88,9 +89,11 @@ public class ServerTest {
 		Constructor cp = new Constructor(l);
 		profileMemory();
 		QueryServer qs = new QueryServer(cp.getJson());
+		// Some sample queries
 		System.out.println(qs.query("as"));
 		System.out.println(qs.query("ma"));
 		System.out.println(qs.query("macadamiz"));
+		System.out.println(qs.query("_"));
 	}
 	
 	public static void profileMemory() {
