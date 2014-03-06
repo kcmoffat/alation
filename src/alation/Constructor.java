@@ -14,22 +14,12 @@ public class Constructor {
 	private Serializable D;
 	private Map<String, List<Pair>> index;
 	
-	public static void main (String [] args) {
-		
-		Pair a = new Pair ("rev_Quarter_", 1);
-		Pair b = new Pair ("_Banana_money_", 7);
-		Pair c = new Pair ("banana_rev_quarter", 8);
-		Pair d = new Pair ("monkey_money_revenue", 9);
-		List<Pair> l = new LinkedList<Pair> ();
-		l.add(a);
-		l.add(b);
-		l.add(c);
-		l.add(d);
-		Constructor cp = new Constructor(l);
-		QueryServer qs = new QueryServer(cp.getJson());
-		System.out.println(qs.query("REV"));
-	}
-	
+	/**
+	 * Allocate a Constructor, create a Map of query substrings 
+	 * to name/score pairs, and serialize the Map into a JSON String.
+	 * Assuming input is a List<Pair>, not a file.
+	 * @param inputList
+	 */
 	public Constructor (List<Pair> inputList) {
 		index = new HashMap<String, List<Pair>> ();
 		for (Pair pair : inputList) {
@@ -61,7 +51,7 @@ public class Constructor {
 	}
 	
 	/**
-	 *  splits name into list of suffixes based on occurrences of "_".
+	 *  Splits name into list of suffixes based on occurrences of "_".
 	 *  
 	 *  Example usage: "quarterly_international_revenue" would return:
 	 *  {"quarterly_international_revenue", "international_revenue", "revenue"}
@@ -80,7 +70,7 @@ public class Constructor {
 		return result;
 	}
 	/**
-	 * returns a list of all possible prefixes of name
+	 * Returns a list of all possible prefixes of name
 	 * @param name
 	 * @return List<String>	list of prefixes of name
 	 */

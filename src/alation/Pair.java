@@ -1,5 +1,9 @@
 package alation;
 
+/**
+ * Wrapper class for name/score pairs
+ *
+ */
 public class Pair implements Comparable<Pair>{
 	private String name;
 	private int score;

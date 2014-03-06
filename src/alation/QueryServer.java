@@ -11,6 +11,11 @@ import com.google.gson.reflect.TypeToken;
 public class QueryServer {
 	Map<String, List<Pair>> index;
 	
+	/**
+	 * Allocate a new QueryServer, and parse the input JSON into
+	 * a Map
+	 * @param D
+	 */
 	public QueryServer (Serializable D) {
 		Type hashMapType = new TypeToken<HashMap<String, List<Pair>>> () {}.getType();
 		Gson gson = new Gson();

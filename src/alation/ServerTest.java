@@ -20,7 +20,7 @@ public class ServerTest {
 
 	@Test
 	public void ServerTest() {
-		// this is mainly a test of efficiency.
+		// this is mainly a test of feasibility for large numbers of entries.
 		// i tested each method with print statements as i went, and would
 		// add more extensive unit tests to each method given more time
 		InputStream randomWords;
