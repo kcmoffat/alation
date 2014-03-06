@@ -85,10 +85,13 @@ public class ServerTest {
 				try {writer.close();} catch (Exception e) {}
 			}
 		
+		System.out.println("Number of entries: " + l.size());
         profileMemory();
 		Constructor cp = new Constructor(l);
+		System.out.println("Done with constructor setup");
 		profileMemory();
 		QueryServer qs = new QueryServer(cp.getJson());
+		System.out.println("Done with server setup");
 		// Some sample queries
 		System.out.println(qs.query("as"));
 		System.out.println(qs.query("ma"));
