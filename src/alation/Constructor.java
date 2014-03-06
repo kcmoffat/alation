@@ -17,8 +17,8 @@ public class Constructor {
 	/**
 	 * Allocate a Constructor, create a Map of query substrings 
 	 * to name/score pairs, and serialize the Map into a JSON String.
-	 * Assuming input is a List<Pair>, not a file.
-	 * @param inputList
+	 * Assuming input is a List<Pair>, not a file, and is non-null
+	 * @param inputList	
 	 */
 	public Constructor (List<Pair> inputList) {
 		index = new HashMap<String, List<Pair>> ();
