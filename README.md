@@ -5,7 +5,7 @@ Runtime:
 Let n=number of name/score pairs in the input list.
 Let m=the number of bytes in the largest word
 Let k=the largest number of underscores in any given word
-For each input word, we create a key in our Map for all O(m) possible prefixes.  We do the same for each suffix after the O(k) underscores.  With constant time inserts, creating the Map takes O(nmk) time.  Next we sort each list of name/score pairs for every key.  This runtime can vary depending on the distribution of words to prefixes, but a (not very tight) upper bound would be O(n^2logn).  Finally, running a query takes O(1) after the server has deserialized the JSON, since the query’s list of matching names is already sorted.
+For each input word, we create a key in our Map for all O(m) possible prefixes.  We do the same for each suffix after the O(k) underscores.  With constant time inserts, creating the Map takes O(nmk) time.  Next we sort each list of name/score pairs for every key.  This runtime can vary depending on the distribution of words to prefixes, but a (not very tight) upper bound would be O(n^2logn).  Finally, running a query takes O(1) after the server has deserialized the JSON, since Map.put() is O(1), and the query’s list of matching names is already sorted (so takes O(1) to return the first 10 names).
 
 Memory usage:
 Memory usage was the limiting factor in my tests.  Before testing, I did the following calculation to see if my algorithm would be feasible.  I initially had an error, which made the algorithm seem more feasible with 1MM entries.  
