@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Constructor {
-	private Serializable D;
 	private Map<String, PriorityQueue<Pair>> index;
 	
 	/**
@@ -47,10 +46,6 @@ public class Constructor {
 				}
 			}
 		}
-		
-		Type hashMapType = new TypeToken<HashMap<String, PriorityQueue<Pair>>> () {}.getType();
-		Gson gson = new Gson();
-		this.D = gson.toJson(index, hashMapType);
 	}
 	
 	/**
@@ -87,6 +82,9 @@ public class Constructor {
 	}
 	
 	public Serializable getJson () {
-		return this.D;
+		System.out.println("Serializing");
+		Type hashMapType = new TypeToken<HashMap<String, PriorityQueue<Pair>>> () {}.getType();
+		Gson gson = new Gson();
+		return gson.toJson(index, hashMapType);
 	}
 }

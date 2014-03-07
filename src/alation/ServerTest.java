@@ -65,11 +65,11 @@ public class ServerTest {
 			l.add(p2);
 			l.add(p3);
 			l.add(p4);
-			l.add(p5);
-//			l.add(p6);
-//			l.add(p7);
-//			l.add(p8);
-//			l.add(p9);
+			//l.add(p5);
+			//l.add(p6);
+			//l.add(p7);
+			//l.add(p8);
+			//l.add(p9);
 		}
 		// Write out file for comparison
 		Writer writer = null;
