@@ -3,13 +3,17 @@ import java.util.Map;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 import java.io.Serializable;
+
 import com.google.gson.Gson;
+
 import java.lang.reflect.Type;
+
 import com.google.gson.reflect.TypeToken;
 
 public class QueryServer {
-	Map<String, List<Pair>> index;
+	Map<String, PriorityQueue<Pair>> index;
 	
 	/**
 	 * Allocate a new QueryServer, and parse the input JSON into
@@ -17,7 +21,7 @@ public class QueryServer {
 	 * @param D
 	 */
 	public QueryServer (Serializable D) {
-		Type hashMapType = new TypeToken<HashMap<String, List<Pair>>> () {}.getType();
+		Type hashMapType = new TypeToken<HashMap<String, PriorityQueue<Pair>>> () {}.getType();
 		Gson gson = new Gson();
 		this.index = gson.fromJson((String)D, hashMapType);
 	}
@@ -33,11 +37,12 @@ public class QueryServer {
 	public List<String> query (String s) {
 		List<String> result = null;
 		s = s.toLowerCase();
-		List<Pair> matches = index.get(s);
+		PriorityQueue<Pair> matches = index.get(s);
 		if (matches != null) {
 			result = new LinkedList<String> ();
-			for (int i = 0; i < Math.min(10,  matches.size()); i++) {
-				result.add(matches.get(i).name());
+			int numResults = Math.min(10,matches.size());
+			for (int i = 0; i < numResults; i++) {
+				result.add(0, matches.remove().name());
 			}
 		}
 		return result;

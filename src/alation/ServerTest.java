@@ -64,8 +64,8 @@ public class ServerTest {
 			l.add(p1);
 			l.add(p2);
 			l.add(p3);
-//			l.add(p4);
-//			l.add(p5);
+			l.add(p4);
+			l.add(p5);
 //			l.add(p6);
 //			l.add(p7);
 //			l.add(p8);

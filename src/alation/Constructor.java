@@ -5,14 +5,16 @@ import java.util.Map;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.io.Serializable;
 import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class Constructor {
 	private Serializable D;
-	private Map<String, List<Pair>> index;
+	private Map<String, PriorityQueue<Pair>> index;
 	
 	/**
 	 * Allocate a Constructor, create a Map of query substrings 
@@ -21,31 +23,32 @@ public class Constructor {
 	 * @param inputList	
 	 */
 	public Constructor (List<Pair> inputList) {
-		index = new HashMap<String, List<Pair>> ();
+		index = new HashMap<String, PriorityQueue<Pair>> ();
 		for (Pair pair : inputList) {
 			String name = pair.name();
 			List<String> suffixes = splitStringByUnderscore(name);
 			for (String suffix : suffixes) {
 				List<String> prefixes = getPrefixList(suffix);
 				for (String prefix : prefixes) {
-					List<Pair> values = index.get(prefix);
+					PriorityQueue<Pair> values = index.get(prefix);
 					if (values == null) {
-						values = new LinkedList<Pair> ();
+						values = new PriorityQueue<Pair> ();
 						values.add(pair);
 						index.put(prefix, values);
-					} else {
+					} else if (values.size() < 10){
 						values.add(pair);
+					} else {
+						Pair minValue = values.peek();
+						if (pair.compareTo(minValue) > 0) {
+							values.remove();
+							values.add(pair);
+						}
 					}
 				}
 			}
 		}
-		Iterator<List<Pair>> values = index.values().iterator();
-		while (values.hasNext()) {
-			List<Pair> next = values.next();
-			Collections.sort(next);
-		}
 		
-		Type hashMapType = new TypeToken<HashMap<String, List<Pair>>> () {}.getType();
+		Type hashMapType = new TypeToken<HashMap<String, PriorityQueue<Pair>>> () {}.getType();
 		Gson gson = new Gson();
 		this.D = gson.toJson(index, hashMapType);
 	}

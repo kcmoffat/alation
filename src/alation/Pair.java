@@ -22,7 +22,7 @@ public class Pair implements Comparable<Pair>{
 	}
 	
 	public int compareTo(Pair p) {
-		return p.score() - this.score(); // reversed to sort decreasing
+		return this.score() - p.score();
 	}
 	
 	public String toString () {
